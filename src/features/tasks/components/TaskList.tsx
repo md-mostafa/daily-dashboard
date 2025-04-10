@@ -3,6 +3,13 @@ import TaskItem from "./TaskItem";
 
 export default function TaskList() {
     const tasks = useTaskStore((state) => state.tasks);
+    const filter = useTaskStore((state) => state.filter);
+
+    const filteredTasks = tasks.filter((task) => {
+        if (filter === 'completed') return task.completed;
+        if (filter === 'pending') return !task.completed;
+        return true;
+    });
 
     if (tasks.length === 0) {
         return (
@@ -14,7 +21,7 @@ export default function TaskList() {
 
     return (
         <div className="flex flex-col gap-4">
-            {tasks.map((task) => (
+            {filteredTasks.map((task) => (
                 <TaskItem key= {task.id} task={task} />
             ))}
         </div>

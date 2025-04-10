@@ -1,4 +1,5 @@
 import AddTaskForm from "./features/tasks/components/AddTaskForm";
+import TaskFilterToggle from "./features/tasks/components/TaskFilterToggle";
 import TaskList from "./features/tasks/components/TaskList";
 
 export default function App() {
@@ -7,6 +8,7 @@ export default function App() {
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center">🗓️  Daily Dashboard</h1>
         <AddTaskForm />
+        <TaskFilterToggle />
         <div className="my-8">
           <TaskList />
         </div>
