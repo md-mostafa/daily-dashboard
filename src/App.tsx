@@ -1,4 +1,5 @@
 import AddTaskForm from "./features/tasks/components/AddTaskForm";
+import TaskList from "./features/tasks/components/TaskList";
 
 export default function App() {
   return (
