@@ -51,4 +51,23 @@ export default tseslint.config({
     ...reactDom.configs.recommended.rules,
   },
 })
+
+```
+
+### 🗂 Folder Structure (Modern & Scalable)
+```
+/daily-dashboard
+├── /public
+├── /src
+│   ├── /components      # Reusable UI parts
+│   ├── /features        # Each feature module (tasks, weather, etc.)
+│   ├── /hooks           # Custom hooks (for API, state, etc.)
+│   ├── /pages           # Pages like Home, About, etc.
+│   ├── /styles          # Global or Tailwind config
+│   ├── App.tsx          # (Optional: use TypeScript)
+│   └── main.tsx
+├── tailwind.config.js
+├── vite.config.js
+└── package.json
+
 ```
