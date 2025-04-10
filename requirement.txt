@@ -1,0 +1,49 @@
+📋 Requirement List (Feature Breakdown)
+🧩 Core Feature #1: Task Manager (MVP)
+
+1. Add a new task (title + optional description)
+2. Mark a task as completed
+3. Delete a task
+4. View tasks as a list
+5. Filter tasks: All / Completed / Incomplete
+6. Store tasks in localStorage (so they don’t disappear on reload)
+
+🌤️ Feature #2: Weather Widget (Optional Later)
+1. Get weather info based on current location (or fixed city)
+2. Show temperature, condition (sunny/cloudy/rain), and icon
+3. Use OpenWeatherMap API or similar (free)
+
+📅 Feature #3: Simple Calendar Events (Optional Later)
+1. Show a list of pre-defined upcoming events (hardcoded)
+2. Add new event (basic form)\
+3. Delete an event
+4. Display upcoming events sorted by date
+
+💡 Feature #4: Quote of the Day
+1. Fetch a motivational quote from an API (e.g. quotable.io)
+2. Refresh daily or on button click
+
+
+🧠 Extra (for practice or later improvements)
+1. Responsive design (mobile & desktop)
+2. Dark mode toggle
+3. Animations with Framer Motion
+4. Unit tests with Vitest or Jest (optional for intermediate level)
+5. Deploy to Vercel
+
+
+
+✅ Finalized Stack (2025 Edition — All Latest Tools)
+| Purpose	            | Tool / Stack	                                |Why It's Used
+| Frontend	            | React 18+ with TypeScript                     |Modern and type-safe with hooks, concurrent features
+| Bundler	            | Vite	                                        |Super fast dev server, better than CRA
+| Styling	            | Tailwind CSS	                                |Popular utility-first framework, very modern and scalable
+| State Management	    | Zustand	                                    |Lightweight, easier than Redux, perfect for local/global state
+| Data Fetching	        | TanStack Query v5+	                        |Modern solution for caching, loading, error states
+| Routing	            | React Router v6+	                            |Declarative routing, lazy loading support
+| Icons	                | Lucide or Heroicons	                        |SVG-based modern icon packs
+| Animation	            | Framer Motion v11+	                        |Industry standard for animation
+| API Requests	        | Fetch API or Axios (if needed)	            |Simple HTTP requests; you can later add OpenAPI or SWR
+| Forms (Optional)	    | React Hook Form (if forms grow complex)	    |Elegant form handling (can skip for simple apps)
+| Deployment	        | Vercel	                                    |Free CI/CD + serverless ready + easiest to connect with GitHub
+| esting (Later)	    | Vitest or Jest	                            |Optional, only if you want to learn testing
