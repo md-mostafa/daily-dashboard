@@ -2,8 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DashboardLayout from "./layout/DashboardLayout";
 import DailyTasksPage from "./pages/DailyTasksPage";
 import WeatherPage from "./pages/WeatherPage";
+import { useDashboardStore } from "./store/dashboardStore";
+import { useEffect } from "react";
 
-export default function App() {
+
+
+export function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -14,4 +18,17 @@ export default function App() {
       </Routes>
     </BrowserRouter>
   )
+}
+
+export default function AppWrapper() {
+  const setTime = useDashboardStore((state) => state.setTime);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [setTime]);
+
+  return <App />
 }
