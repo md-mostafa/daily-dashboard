@@ -61,8 +61,13 @@ export default tseslint.config({
 ├── /src
 │   ├── /components      # Reusable UI parts
 │   ├── /features        # Each feature module (tasks, weather, etc.)
+|   │   ├── /tasks
+|   │   └── /weather
 │   ├── /hooks           # Custom hooks (for API, state, etc.)
 │   ├── /pages           # Pages like Home, About, etc.
+|   │   ├── DailyTasksPage.tsx
+|   │   └── WeatherPage.tsx
+|   ├── /layout
 │   ├── /styles          # Global or Tailwind config
 │   ├── App.tsx          # (Optional: use TypeScript)
 │   └── main.tsx
