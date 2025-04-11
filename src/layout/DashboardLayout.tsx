@@ -32,6 +32,18 @@ export default function DashboardLayout() {
                     >
                             🌤️ Weather
                     </NavLink>
+                    <NavLink
+                        to="/quote"
+                        className={({ isActive }) =>
+                            `px-4 py-2 rounded-md text-left font-meidum ${
+                                isActive
+                                    ? 'bg-blue-600 text-white'
+                                    : 'text-zinc-700 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800'
+                            }`
+                        }
+                    >
+                            ✨ Quotes
+                    </NavLink>
                 </nav>
             </aside>
             

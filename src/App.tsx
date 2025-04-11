@@ -4,6 +4,7 @@ import DailyTasksPage from "./pages/DailyTasksPage";
 import WeatherPage from "./pages/WeatherPage";
 import { useDashboardStore } from "./store/dashboardStore";
 import { useEffect } from "react";
+import QuoteCard from "./features/qoute/components/QuoteCard";
 
 
 
@@ -13,7 +14,8 @@ export function App() {
       <Routes>
         <Route path="/" element={<DashboardLayout />} >
           <Route index element={<DailyTasksPage />} />
-          <Route path="weather" element={<WeatherPage />} />
+          <Route path="/weather" element={<WeatherPage />} />
+          <Route path="/quote" element={<QuoteCard />} />
         </ Route>
       </Routes>
     </BrowserRouter>
