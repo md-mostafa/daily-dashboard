@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
+import TopBar from "./TopBar";
 
 export default function DashboardLayout() {
     return (
@@ -33,10 +34,13 @@ export default function DashboardLayout() {
                     </NavLink>
                 </nav>
             </aside>
-
-            <main className="flex-1 p-6 overflow-auto bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white">
-                <Outlet />
-            </main>
+            
+            <div className="flex-1 flex flex-col">
+                <TopBar />
+                <main className="flex-1 p-6 overflow-auto bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white">
+                    <Outlet />
+                </main>
+            </div>
         </div>
-    )
+    );
 }
