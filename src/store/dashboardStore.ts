@@ -6,14 +6,23 @@ interface DashboardState {
         name: string;
         avatar: string;
     };
+    theme: 'light' | 'dark';
     setTime: (newTime: string) => void;
+    toggleTheme: () => void
 }
 
 export const useDashboardStore = create<DashboardState>((set) => ({
     time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
     user: {
         name: "Mostafa",
-        avatar: "https://i.pravater.cc/40?img=3",
+        avatar: "https://i.pravatar.cc/40?img=3",
     },
-    setTime: (newTime: string) => set(() => ({ time: newTime }))
-}))
+    theme: localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
+    setTime: (newTime: string) => set(() => ({ time: newTime })),
+    toggleTheme: () => 
+        set((state) => {
+            const newTheme = state.theme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            return { theme: newTheme }
+    }),
+}));

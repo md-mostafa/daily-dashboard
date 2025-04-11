@@ -21,7 +21,7 @@ export function App() {
 }
 
 export default function AppWrapper() {
-  const setTime = useDashboardStore((state) => state.setTime);
+  const { theme, setTime }= useDashboardStore();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,6 +29,15 @@ export default function AppWrapper() {
     }, 1000);
     return () => clearInterval(interval);
   }, [setTime]);
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, [theme]);
 
   return <App />
 }
