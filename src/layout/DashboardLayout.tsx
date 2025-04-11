@@ -5,7 +5,7 @@ export default function DashboardLayout() {
     return (
         <div className="flex h-screen">
             <aside className="w-64 bg-zinc-100 dark:bg-zinc-900 p-6 space-y-4">
-                <h1 className="text-2xl font-bold mb-4">🧭 Dashboard</h1>
+                <h1 className="text-2xl font-bold text-zinc-700 dark:text-white mb-4">🧭 Dashboard</h1>
                 <nav className="flex flex-col gap-3">
                     <NavLink
                         to="/"
