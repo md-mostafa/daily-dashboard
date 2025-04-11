@@ -1,6 +1,7 @@
 import AddTaskForm from "./features/tasks/components/AddTaskForm";
 import TaskFilterToggle from "./features/tasks/components/TaskFilterToggle";
 import TaskList from "./features/tasks/components/TaskList";
+import WeatherWidget from "./features/weather/WeatherWidget";
 
 export default function App() {
   return (
@@ -11,6 +12,10 @@ export default function App() {
         <TaskFilterToggle />
         <div className="my-8">
           <TaskList />
+        </div>
+
+        <div className="mb-6">
+          <WeatherWidget />
         </div>
       </div>
     </div>
