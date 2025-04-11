@@ -1,7 +1,9 @@
+import { supabase } from "../../lib/supabaseClient";
 import { useWeather } from "./hooks/useWeather";
 
 export default function WeatherWidget() {
     const { data, isLoading, isError } = useWeather();
+    supabase.auth.getSession().then(console.log);
 
     if (isLoading) return <div className="text-sm text-zinc-500"> Loading weather... </div>
     if (isError || !data) return <div className="text-red-500"> Failed to load weather  😢</div>

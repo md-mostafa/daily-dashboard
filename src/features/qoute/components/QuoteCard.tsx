@@ -3,8 +3,6 @@ import { useQuote } from "../hooks/useQuote";
 export default function QuoteCard() {
     const { data, isLoading, isError, refetch } = useQuote();
 
-    console.log("data", data);
-
     return (
         <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow space-y-6 text-center">
             <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400">📜 Quote of the Day</h2>
