@@ -1,1 +1,0 @@
-export { useWeather } from "../../../hooks/useWeather";
