@@ -13,6 +13,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
+    "erasableSyntaxOnly": false
   }
 }
