@@ -11,12 +11,20 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { useDashboardStore } from "@/store/dashboardStore";
+import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
-import { Moon, Sun, LayoutDashboard, ListTodo, CloudSun, Quote, Menu } from "lucide-react";
+import { Moon, Sun, LayoutDashboard, ListTodo, CloudSun, Quote, Menu, LogOut } from "lucide-react";
 import { useState } from "react";
 import DailyTasksPage from "@/pages/DailyTasksPage";
 import WeatherPage from "@/pages/WeatherPage";
 import QuotePage from "@/pages/QuotePage";
+import LoginPage from "@/pages/auth/LoginPage";
+import RegisterPage from "@/pages/auth/RegisterPage";
+import ForgotPasswordPage from "@/pages/auth/ForgotPasswordPage";
+import ResetPasswordPage from "@/pages/auth/ResetPasswordPage";
+import VerifyEmailPage from "@/pages/auth/VerifyEmailPage";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { PublicRoute } from "@/components/auth/PublicRoute";
 
 // Root route
 const rootRoute = createRootRoute({
@@ -28,7 +36,58 @@ const rootRoute = createRootRoute({
   ),
 });
 
-// Dashboard layout route
+// Auth pages (public routes, directly under root)
+const loginRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/login",
+  component: () => (
+    <PublicRoute>
+      <LoginPage />
+    </PublicRoute>
+  ),
+});
+
+const registerRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/register",
+  component: () => (
+    <PublicRoute>
+      <RegisterPage />
+    </PublicRoute>
+  ),
+});
+
+const forgotPasswordRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/forgot-password",
+  component: () => (
+    <PublicRoute>
+      <ForgotPasswordPage />
+    </PublicRoute>
+  ),
+});
+
+const resetPasswordRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/reset-password",
+  component: () => (
+    <PublicRoute>
+      <ResetPasswordPage />
+    </PublicRoute>
+  ),
+});
+
+const verifyEmailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/verify-email",
+  component: () => (
+    <PublicRoute>
+      <VerifyEmailPage />
+    </PublicRoute>
+  ),
+});
+
+// Dashboard layout (protected routes)
 const navItems = [
   { to: "/", label: "Tasks", icon: ListTodo },
   { to: "/weather", label: "Weather", icon: CloudSun },
@@ -36,9 +95,12 @@ const navItems = [
 ];
 
 function DashboardLayout() {
-  const { time, user, theme, toggleTheme } = useDashboardStore();
+  const { time, user: dashboardUser, theme, toggleTheme } = useDashboardStore();
+  const { user: authUser, logout } = useAuthStore();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const displayUser = authUser ?? dashboardUser;
 
   return (
     <div className="flex h-dvh overflow-hidden bg-background">
@@ -52,7 +114,7 @@ function DashboardLayout() {
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          sidebarOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         <div className="flex h-14 items-center gap-2 border-b px-4">
@@ -72,7 +134,7 @@ function DashboardLayout() {
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   isActive
                     ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                    : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                    : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground",
                 )}
               >
                 <item.icon className="size-4" />
@@ -84,17 +146,26 @@ function DashboardLayout() {
 
         <Separator />
 
-        <div className="p-3">
+        <div className="p-3 space-y-2">
           <div className="flex items-center gap-3 rounded-lg px-3 py-2">
             <Avatar className="size-8">
-              <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback>{user.name[0]}</AvatarFallback>
+              <AvatarImage src={displayUser?.avatar ?? undefined} alt={displayUser?.name ?? "User"} />
+              <AvatarFallback>{displayUser?.name?.[0] ?? "U"}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-              <span className="text-sm font-medium text-sidebar-foreground">{user.name}</span>
+              <span className="text-sm font-medium text-sidebar-foreground">
+                {displayUser?.name ?? "User"}
+              </span>
               <span className="text-xs text-sidebar-foreground/60">{time}</span>
             </div>
           </div>
+          <button
+            onClick={() => logout()}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors"
+          >
+            <LogOut className="size-4" />
+            Sign out
+          </button>
         </div>
       </aside>
 
@@ -133,7 +204,11 @@ function DashboardLayout() {
 const dashboardLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "dashboard",
-  component: DashboardLayout,
+  component: () => (
+    <ProtectedRoute>
+      <DashboardLayout />
+    </ProtectedRoute>
+  ),
 });
 
 // Index route (tasks)
@@ -159,6 +234,11 @@ const quoteRoute = createRoute({
 
 // Build the route tree
 const routeTree = rootRoute.addChildren([
+  loginRoute,
+  registerRoute,
+  forgotPasswordRoute,
+  resetPasswordRoute,
+  verifyEmailRoute,
   dashboardLayoutRoute.addChildren([indexRoute, weatherRoute, quoteRoute]),
 ]);
 
