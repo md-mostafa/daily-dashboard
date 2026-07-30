@@ -9,6 +9,10 @@ import { TokenService } from "./services/token.service";
 import { usersRepository } from "../db/repositories/users.repository";
 import { refreshTokensRepository } from "../db/repositories/refresh-tokens.repository";
 import { auditLogsRepository } from "../db/repositories/audit-logs.repository";
+import { emailVerificationsRepository } from "../db/repositories/email-verifications.repository";
+import { db } from "../db/connection";
+import { users as usersTable } from "../db/schema/users";
+import { eq } from "drizzle-orm";
 import type { RegisterDto } from "./dto/register.dto";
 import type { LoginDto } from "./dto/login.dto";
 import type { AuthResponse } from "./interfaces/auth-response.interface";
@@ -310,8 +314,6 @@ export class AuthService {
    */
   async verifyEmail(token: string, ipAddress: string, userAgent?: string): Promise<void> {
     const tokenHash = this.tokenService.hashRefreshToken(token);
-    // Find the email verification record
-    const { emailVerificationsRepository } = await import("../db/repositories/email-verifications.repository");
     const verification = await emailVerificationsRepository.findByToken(tokenHash);
 
     if (!verification) {
@@ -380,11 +382,6 @@ export class AuthService {
     userAgent?: string,
   ): Promise<void> {
     const tokenHash = this.tokenService.hashRefreshToken(token);
-
-    // Find user with this reset token
-    const { users: usersTable } = await import("../db/schema/users");
-    const { eq } = await import("drizzle-orm");
-    const { db } = await import("../db/connection");
 
     const result = await db
       .select()
