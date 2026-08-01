@@ -1,0 +1,15 @@
+{
+  "extends": "../../packages/tsconfig/api.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.api.tsbuildinfo",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "drizzle.config.ts"],
+  "references": [
+    { "path": "../../packages/shared" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@repo/tsconfig",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base": "./base.json",
+    "./web": "./web.json",
+    "./api": "./api.json"
+  },
+  "files": [
+    "base.json",
+    "web.json",
+    "api.json"
+  ]
+}

@@ -1,3 +1,17 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build output
+dist
+dist-ssr
+.next
+
+# Environment
+.env
+.env.local
+.env.*.local
+
 # Logs
 logs
 *.log
@@ -7,19 +21,22 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
+*.sw?
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
-.env
+.DS_Store
+
+# Testing
+coverage
+
+# Docker
+docker/data
+
+# TypeScript
+*.tsbuildinfo
